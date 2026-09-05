@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Jemi — Your Day ✨</title>
+<meta name="theme-color" content="#100819">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box}
+:root{--bg:#0c0712;--glass:rgba(255,255,255,.08);--line:rgba(255,255,255,.15);--pink:#ffb7e6;--soft:#f8e7f5}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:white;font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:
+radial-gradient(circle at 15% 15%,rgba(184,83,171,.25),transparent 30%),
+radial-gradient(circle at 85% 70%,rgba(106,67,190,.22),transparent 34%),
+linear-gradient(135deg,#0b0610,#1a0d20 50%,#08050d);z-index:-3}
+.noise{position:fixed;inset:0;opacity:.035;z-index:50;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E")}
+#stars,#hearts{position:fixed;inset:0;pointer-events:none;z-index:-1}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:blink 2.5s ease-in-out infinite}
+@keyframes blink{50%{opacity:.15;transform:scale(.5)}}
+.heart{position:absolute;bottom:-30px;font-size:18px;animation:float 7s linear forwards;opacity:.7}
+@keyframes float{to{transform:translateY(-115vh) rotate(30deg);opacity:0}}
+section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:30px 18px;position:relative}
+.wrap{width:min(950px,94vw);text-align:center}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:32px;padding:clamp(28px,6vw,62px);backdrop-filter:blur(18px);box-shadow:0 30px 100px rgba(0,0,0,.45)}
+.serif{font-family:"Cormorant Garamond",Georgia,serif}
+.eyebrow{text-transform:uppercase;letter-spacing:5px;font-size:10px;color:#e7c8e3}
+h1{font:600 clamp(68px,18vw,170px)/.78 "Cormorant Garamond",Georgia,serif;margin:22px 0;color:#fff;text-shadow:0 0 35px rgba(255,183,230,.25)}
+h2{font:600 clamp(40px,9vw,78px)/1 "Cormorant Garamond",Georgia,serif;margin:14px 0}
+.lead{max-width:650px;margin:0 auto;color:#dbcddd;line-height:1.8;font-size:15px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(255,255,255,.25);background:#fff;color:#251127;padding:15px 25px;border-radius:999px;font-weight:700;cursor:pointer;margin:18px 6px 0;transition:.3s;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.btn:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.btn.alt{background:transparent;color:white}
+.hidden{display:none!important}
+.reveal{animation:reveal 1.2s ease both}
+@keyframes reveal{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:none}}
+.scroll{position:absolute;bottom:25px;opacity:.5;font-size:11px;letter-spacing:2px}
+.scroll span{display:block;margin-top:8px;font-size:20px;animation:bounce 1.5s infinite}
+@keyframes bounce{50%{transform:translateY(6px)}}
+.type{min-height:55px;font:500 clamp(22px,5vw,38px)/1.35 "Cormorant Garamond",Georgia,serif;color:var(--soft)}
+.envelope{width:170px;height:115px;margin:15px auto 28px;position:relative;cursor:pointer}
+.env-body{position:absolute;inset:0;border-radius:12px;background:linear-gradient(145deg,#f3d9ed,#b986ad);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.env-flap{position:absolute;left:0;top:0;border-left:85px solid transparent;border-right:85px solid transparent;border-top:65px solid #d3a5ca;transform-origin:top;transition:.7s;z-index:2}
+.envelope.open .env-flap{transform:rotateX(180deg)}
+.seal{position:absolute;z-index:4;left:50%;top:52%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#351738;border:2px solid #f7c7e9;font-size:18px;transition:.5s}
+.envelope.open .seal{opacity:0;transform:translate(-50%,-50%) scale(1.6)}
+.letter{max-width:720px;margin:0 auto;text-align:left;color:#e9dce9;line-height:1.9;font-size:15px}
+.letter .drop{font:700 48px/1 "Cormorant Garamond";float:left;padding:7px 8px 0 0;color:#ffb7e6}
+.photo-frame{max-width:510px;margin:30px auto 10px;padding:10px;background:#fff;border-radius:5px;box-shadow:0 25px 70px rgba(0,0,0,.55);transform:rotate(-1.2deg)}
+.photo-frame img{width:100%;display:block}
+.caption{font:500 21px "Cormorant Garamond";margin:20px 0;color:#f6e3f1}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:700px;margin:30px auto}
+.mini{padding:22px 14px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.045)}
+.mini b{display:block;font:600 24px "Cormorant Garamond";margin-bottom:6px}
+.mini span{font-size:12px;color:#cbb9cb}
+.final-heart{font-size:76px;animation:beat 1.5s infinite}
+@keyframes beat{50%{transform:scale(1.16)}}
+.signature{margin-top:28px;font:600 27px "Cormorant Garamond";color:#f6c8e9}
+.progress{position:fixed;top:0;left:0;height:2px;background:#f6c8e9;width:0;z-index:100}
+@media(max-width:560px){.cards{grid-template-columns:1fr}.glass{border-radius:25px}.envelope{transform:scale(.9)}}
+</style>
+</head>
+<body>
+<div class="noise"></div><div id="stars"></div><div id="hearts"></div><div class="progress" id="progress"></div>
+
+<section id="home">
+ <div class="wrap">
+  <div class="glass reveal">
+   <div class="eyebrow">A private little corner of the internet</div>
+   <h1>Jemi</h1>
+   <div class="type" id="type"></div>
+   <p class="lead">This isn't just a birthday wish. It's a tiny journey made for one very special person.</p>
+   <button class="btn" onclick="begin()">Begin the surprise ✨</button>
+  </div>
+  <div class="scroll">SCROLL FOR THE MAGIC<span>⌄</span></div>
+ </div>
+</section>
+
+<section id="chapter1" class="hidden">
+ <div class="wrap"><div class="glass reveal">
+  <div class="eyebrow">Chapter I · The little secret</div>
+  <h2>Someone left you a letter.</h2>
+  <p class="lead">But first… you have to open it yourself.</p>
+  <div class="envelope" id="env" onclick="openLetter()">
+   <div class="env-body"></div><div class="env-flap"></div><div class="seal">♥</div>
+  </div>
+  <p id="hint" class="lead" style="font-size:12px">Tap the envelope</p>
+  <div id="letterText" class="hidden">
+   <div class="letter">
+    <p><span class="drop">D</span>ear Jemi,</p>
+    <p>Today is your day, and I wanted to do something a little different. So instead of sending only a “Happy Birthday” text, I made you a tiny world on the internet.</p>
+    <p>Some people become important without making a big announcement. They simply become part of our conversations, our laughs, our random moments, and our memories. You are one of those people.</p>
+    <p>I hope this new chapter brings you calm when life feels heavy, courage when things feel difficult, and a thousand little reasons to smile.</p>
+    <p>Keep your beautiful heart, keep dreaming, and keep being you. The world is better with your smile in it.</p>
+    <p>Happy Birthday, Jemi. ❤️</p>
+   </div>
+   <button class="btn" onclick="go('chapter2')">Continue the story →</button>
+  </div>
+ </div></div>
+</section>
+
+<section id="chapter2" class="hidden">
+ <div class="wrap"><div class="glass reveal">
+  <div class="eyebrow">Chapter II · One frame</div>
+  <h2>A moment worth keeping.</h2>
+  <div class="photo-frame"><img src="jemi.jpg" alt="A special memory"></div>
+  <div class="caption">“A picture freezes a moment. Memories keep it alive.”</div>
+  <p class="lead">And honestly, some moments deserve a permanent place in the story.</p>
+  <button class="btn" onclick="go('chapter3')">There is more… 💫</button>
+ </div></div>
+</section>
+
+<section id="chapter3" class="hidden">
+ <div class="wrap"><div class="glass reveal">
+  <div class="eyebrow">Chapter III · Four little reasons</div>
+  <h2>Why you're special</h2>
+  <div class="cards">
+   <div class="mini"><b>🌷 Your heart</b><span>The kind of warmth people remember.</span></div>
+   <div class="mini"><b>😊 Your smile</b><span>Small thing. Surprisingly powerful.</span></div>
+   <div class="mini"><b>😂 Your chaos</b><span>Because perfect is honestly boring.</span></div>
+   <div class="mini"><b>✨ Simply you</b><span>No explanation needed.</span></div>
+  </div>
+  <button class="btn" onclick="go('final')">Open the final page 🎁</button>
+ </div></div>
+</section>
+
+<section id="final" class="hidden">
+ <div class="wrap"><div class="glass reveal">
+  <div class="final-heart">🎂</div>
+  <div class="eyebrow">The final page</div>
+  <h2>Happy Birthday, Jemi! ❤️</h2>
+  <p class="type" style="margin:20px auto">May your next chapter be your happiest one yet.</p>
+  <p class="lead">May you get the opportunities you deserve, the peace you need, the people who value you, and the happiness you cannot fake.</p>
+  <p class="lead">And whenever you look back at this birthday, I hope you remember one thing:</p>
+  <p class="quote serif" style="font-size:31px;color:#fff">“You are loved, appreciated, and worth celebrating.”</p>
+  <button class="btn" onclick="celebrate()">Make it rain hearts 💖</button>
+  <div class="signature">— Shahriar</div>
+ </div></div>
+</section>
+
+<script>
+const typeEl=document.getElementById('type');
+const phrase="Today, the world celebrates you. ✨";
+let ti=0;
+function typing(){if(ti<=phrase.length){typeEl.textContent=phrase.slice(0,ti++);setTimeout(typing,65)}}
+typing();
+
+const stars=document.getElementById('stars');
+for(let i=0;i<100;i++){let s=document.createElement('i');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.opacity=Math.random();s.style.animationDelay=Math.random()*3+'s';stars.appendChild(s)}
+function hearts(n=25){
+ const h=document.getElementById('hearts');
+ for(let i=0;i<n;i++){let x=document.createElement('div');x.className='heart';x.textContent=['♥','♡','✦','✧'][Math.floor(Math.random()*4)];x.style.left=Math.random()*100+'%';x.style.fontSize=(12+Math.random()*22)+'px';x.style.animationDuration=(5+Math.random()*5)+'s';x.style.animationDelay=(Math.random()*2)+'s';h.appendChild(x);setTimeout(()=>x.remove(),10000)}
+}
+function begin(){hearts(35);go('chapter1')}
+function go(id){
+ document.querySelectorAll('section').forEach(s=>{if(s.id!==id&&s.id!=='home')s.classList.add('hidden')});
+ document.getElementById(id).classList.remove('hidden');
+ document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+function openLetter(){
+ document.getElementById('env').classList.add('open');
+ setTimeout(()=>{document.getElementById('letterText').classList.remove('hidden');document.getElementById('hint').classList.add('hidden');hearts(20)},650);
+}
+function celebrate(){hearts(90);for(let i=0;i<3;i++)setTimeout(()=>hearts(30),i*500)}
+addEventListener('scroll',()=>{let d=document.documentElement;document.getElementById('progress').style.width=(scrollY/(d.scrollHeight-innerHeight)*100)+'%'});
+</script>
+</body>
+</html>
